@@ -39,3 +39,17 @@ llama_sft_trainer = SFTTrainer(
     )
 
 llama_sft_trainer.train()
+
+user_prompt = ""
+text_generation_pipeline = pipeline(
+    task="text-generation", 
+    model=llama_model, 
+    tokenizer=llama_tokenizer,
+    max_lenght=300
+    )
+
+model_answer = text_generation_pipeline(f"<s>[INST]{user_prompt}[/INST]")
+print(model_answer[0]['generated_text'])
+
+
+
